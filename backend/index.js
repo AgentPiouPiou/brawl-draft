@@ -1,6 +1,6 @@
-// index.js - Backend BrawlDraft en ES Module
+// index.js
 import express from "express";
-import fetch from "node-fetch"; // ou 'undici' si Node >= 18
+import fetch from "node-fetch"; // Node >=18: fetch est natif, sinon installer node-fetch
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -11,7 +11,7 @@ const TOKEN = process.env.BRAWL_API_TOKEN;
 
 // Route dynamique pour récupérer le pseudo d'un joueur
 app.get("/player/:tag", async (req, res) => {
-  const playerTag = req.params.tag.toUpperCase();
+  const playerTag = req.params.tag.toUpperCase(); // majuscules automatiques
 
   try {
     const response = await fetch(
