@@ -1,9 +1,32 @@
+// Met en MAJUSCULE automatiquement
+function formatTag() {
+    let input = document.getElementById("tag");
+    input.value = input.value.toUpperCase();
+}
+
+// Appel backend
 async function getPlayer() {
-    const tag = document.getElementById("tag").value;
+    let tag = document.getElementById("tag").value;
 
-    const res = await fetch(`http://localhost:3000/player/${tag}`);
-    const data = await res.json();
+    if (!tag) {
+        document.getElementById("result").innerText = "Entre un tag";
+        return;
+    }
 
-    document.getElementById("result").innerHTML =
-        `Pseudo : ${data.name}`;
+    try {
+        const res = await fetch(`http://localhost:3000/player/${tag}`);
+        const data = await res.json();
+
+        if (data.name) {
+            document.getElementById("result").innerText =
+                "Pseudo : " + data.name;
+        } else {
+            document.getElementById("result").innerText =
+                "Erreur : joueur introuvable";
+        }
+
+    } catch (err) {
+        document.getElementById("result").innerText =
+            "Erreur serveur";
+    }
 }

@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>BrawlDraft</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>BrawlDraft</h1>
 
-    <input type="text" id="tag" placeholder="#PLAYER_TAG">
-    <button onclick="getPlayer()">Rechercher</button>
+    <label>#</label>
+    <input type="text" id="tag" placeholder="PLAYER_TAG" oninput="formatTag()">
 
-    <div id="result">Aucune donnée</div>
+    <button onclick="getPlayer()">Valider</button>
+
+    <p id="result">Aucun résultat</p>
 
     <script src="script.js"></script>
+
 </body>
 </html>
