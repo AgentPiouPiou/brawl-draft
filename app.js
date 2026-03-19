@@ -1,4 +1,4 @@
-const API = "https://ton-projet.vercel.app/api/player";
+const API = "https://brawl-draft-zeta.vercel.app/api/player";
 
 async function loadPlayer() {
   const tag = document.getElementById("tag").value;
