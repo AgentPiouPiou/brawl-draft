@@ -1,46 +1,30 @@
-const modeSelect = document.getElementById("mode");
-const mapSelect = document.getElementById("map");
+const TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFkNjNmMzdiLTU2OGEtNDRmOC04NWU4LWIwOThlZGJkZjczOSIsImlhdCI6MTc3MzkxOTYyMCwic3ViIjoiZGV2ZWxvcGVyLzJmMGY2MDgxLTVjNTYtNzIwMi04YTE3LTA4ODE3MDczNGQ0ZCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMC4wLjAuMCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Xq4Ci5t_ujs-ot7IBijBGeEljfpm82MCLs2RCEyJw05yJMYTKSk09pIKNiKk0yHezzBC8bHl2hhmMpV4jwu2Zw";
 
-// charger modes
-modes.forEach(mode => {
-  const option = document.createElement("option");
-  option.value = mode;
-  option.textContent = mode;
-  modeSelect.appendChild(option);
-});
+async function loadPlayer() {
+  let tag = document.getElementById("tag").value;
 
-// changer maps quand mode change
-modeSelect.addEventListener("change", () => {
-  loadMaps();
-});
+  if (!tag.startsWith("#")) {
+    alert("Ajoute # devant le tag");
+    return;
+  }
 
-function loadMaps() {
-  const selectedMode = modeSelect.value;
-  mapSelect.innerHTML = "";
+  tag = encodeURIComponent(tag);
 
-  maps[selectedMode].forEach(map => {
-    const option = document.createElement("option");
-    option.value = map;
-    option.textContent = map;
-    mapSelect.appendChild(option);
-  });
+  const url = `https://corsproxy.io/?https://api.brawlstars.com/v1/players/${tag}`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`
+      }
+    });
+
+    const data = await res.json();
+
+    document.getElementById("output").textContent =
+      JSON.stringify(data, null, 2);
+
+  } catch (err) {
+    console.error(err);
+  }
 }
-
-// lancer draft
-function startDraft() {
-  const selectedMap = mapSelect.value;
-
-  const sorted = [...brawlers].sort((a, b) => b.winrate - a.winrate);
-
-  const list = document.getElementById("recommendations");
-  list.innerHTML = "";
-
-  sorted.forEach(brawler => {
-    const li = document.createElement("li");
-    li.textContent = `${brawler.name} (WR: ${brawler.winrate}%)`;
-    list.appendChild(li);
-  });
-}
-
-// init
-loadMaps();

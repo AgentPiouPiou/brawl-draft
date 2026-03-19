@@ -1,27 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Brawl Draft Tool</title>
+  <title>Brawl Stats</title>
 </head>
 <body>
 
-<h1>Brawl Draft Tool</h1>
+<h1>Brawl Stats</h1>
 
-<h3>Joueur</h3>
 <input id="tag" placeholder="#PLAYER">
+<button onclick="loadPlayer()">Rechercher</button>
 
-<h3>Mode</h3>
-<select id="mode"></select>
+<pre id="output"></pre>
 
-<h3>Map</h3>
-<select id="map"></select>
-
-<button onclick="startDraft()">Jouer</button>
-
-<h3>Brawlers recommandés</h3>
-<ul id="recommendations"></ul>
-
-<script src="data.js"></script>
 <script src="app.js"></script>
 
 </body>
