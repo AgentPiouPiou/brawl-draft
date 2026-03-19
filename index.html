@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>BrawlDraft Beta V0.1</title>
+  <title>Brawl Draft Tool</title>
 </head>
 <body>
-  <h1>BrawlDraft</h1>
 
-  <label for="playerTag">#ID du joueur :</label>
-  <input type="text" id="playerTag" placeholder="#xxxxxxxxx" maxlength="15">
-  <button id="submitBtn">Valider</button>
+<h1>Brawl Draft Tool</h1>
 
-  <p id="result"></p>
+<h3>Joueur</h3>
+<input id="tag" placeholder="#PLAYER">
 
-  <script src="script.js"></script>
+<h3>Mode</h3>
+<select id="mode"></select>
+
+<h3>Map</h3>
+<select id="map"></select>
+
+<button onclick="startDraft()">Jouer</button>
+
+<h3>Brawlers recommandés</h3>
+<ul id="recommendations"></ul>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
